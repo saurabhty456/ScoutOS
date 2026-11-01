@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2, Plus, X, ChevronDown, ChevronUp } from "lucide-react";
@@ -35,7 +36,7 @@ const TEMPLATES = [
   },
 ];
 
-export default function NewMissionPage() {
+function NewMissionPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [objective, setObjective] = useState("");
@@ -258,5 +259,13 @@ export default function NewMissionPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function NewMissionPage() {
+  return (
+    <Suspense fallback={<div className="flex flex-col flex-1 overflow-hidden" />}>
+      <NewMissionPageInner />
+    </Suspense>
   );
 }
