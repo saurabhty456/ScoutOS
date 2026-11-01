@@ -1,7 +1,8 @@
 import Link from "next/link";
 import {
   Zap, Search, Globe, Bot, MonitorCheck, MousePointer,
-  ArrowRight, CheckCircle2, TrendingUp, Shield, BarChart3, ChevronRight
+  ArrowRight, CheckCircle2, TrendingUp, Shield, BarChart3,
+  ChevronRight, Sparkles
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,40 +13,30 @@ const products = [
     role: "Web Discovery",
     description: "Discover competitors, partners, pricing pages, and market sources from a single query.",
     icon: Search,
-    color: "text-blue-600",
-    bg: "bg-blue-50",
   },
   {
     name: "TinyFetch",
     role: "Content Extraction",
     description: "Pull structured facts from any public webpage — prices, features, team info, policies.",
     icon: Globe,
-    color: "text-emerald-600",
-    bg: "bg-emerald-50",
   },
   {
     name: "TinyAgent",
     role: "Autonomous Research",
     description: "Deploy a goal-directed AI agent to investigate competitors with multi-step web navigation.",
     icon: Bot,
-    color: "text-purple-600",
-    bg: "bg-purple-50",
   },
   {
     name: "TinyBrowser",
     role: "Controlled Automation",
     description: "Run approved browser workflows — navigate, interact, and capture evidence from real pages.",
     icon: MousePointer,
-    color: "text-orange-600",
-    bg: "bg-orange-50",
   },
   {
     name: "TinyMonitor",
     role: "Continuous Monitoring",
     description: "Watch selected pages and topics for changes. Get alerted when a competitor updates pricing.",
     icon: MonitorCheck,
-    color: "text-red-600",
-    bg: "bg-red-50",
   },
 ];
 
@@ -66,15 +57,15 @@ const steps = [
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Nav */}
-      <nav className="border-b border-border sticky top-0 bg-white/95 backdrop-blur-sm z-50">
+      <nav className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-md bg-primary flex items-center justify-center">
-              <Zap className="h-4 w-4 text-white" />
+            <div className="h-7 w-7 rounded-lg bg-primary flex items-center justify-center">
+              <Zap className="h-4 w-4 text-white" fill="white" />
             </div>
-            <span className="font-semibold text-sm">ScoutOS</span>
+            <span className="font-semibold text-sm tracking-tight">ScoutOS</span>
           </div>
           <div className="flex items-center gap-2">
             <Link href="/login">
@@ -88,10 +79,12 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 pt-20 pb-16">
+      <section className="max-w-6xl mx-auto px-6 pt-24 pb-16">
         <div className="max-w-3xl">
-          <Badge variant="info" className="mb-5 text-xs font-medium">AUTONOMOUS BUSINESS INTELLIGENCE</Badge>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.15] mb-5">
+          <div className="inline-flex items-center gap-2 mb-6">
+            <span className="text-xs font-medium text-primary bg-primary/10 rounded-full px-3 py-1 uppercase tracking-wider">Autonomous Business Intelligence</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1] mb-5" style={{ letterSpacing: "-0.04em" }}>
             Your next business advantage starts with better intelligence.
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
@@ -108,34 +101,24 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          {/* Social proof line */}
           <div className="flex items-center gap-6 mt-10">
-            <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-              <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-              <span>Source-backed findings</span>
-            </div>
-            <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-              <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-              <span>5 AI capabilities unified</span>
-            </div>
-            <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-              <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-              <span>Continuous monitoring</span>
-            </div>
+            {["Source-backed findings", "5 AI capabilities unified", "Continuous monitoring"].map((t) => (
+              <div key={t} className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                <CheckCircle2 className="h-4 w-4 text-primary" />
+                <span>{t}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Example missions */}
-      <section className="border-y border-border bg-secondary/30 py-10">
+      <section className="border-y border-border py-10">
         <div className="max-w-6xl mx-auto px-6">
           <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-4">Example missions</p>
           <div className="flex flex-wrap gap-2">
             {exampleMissions.map((m) => (
-              <span
-                key={m}
-                className="flex items-center gap-1.5 text-sm border border-border bg-white rounded-full px-3 py-1.5 text-foreground"
-              >
+              <span key={m} className="flex items-center gap-1.5 text-sm border border-border bg-card rounded-full px-3 py-1.5 text-foreground">
                 <ChevronRight className="h-3 w-3 text-primary" />
                 {m}
               </span>
@@ -146,13 +129,13 @@ export default function LandingPage() {
 
       {/* How it works */}
       <section id="how-it-works" className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-2xl font-bold mb-2">How it works</h2>
+        <h2 className="text-2xl font-semibold mb-2" style={{ letterSpacing: "-0.02em" }}>How it works</h2>
         <p className="text-muted-foreground mb-12">From a business question to structured intelligence in minutes.</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map(({ step, title, desc }) => (
             <div key={step} className="relative">
               <div className="text-xs font-mono text-muted-foreground mb-3">{step}</div>
-              <h3 className="font-semibold mb-2">{title}</h3>
+              <h3 className="font-medium mb-2 text-sm">{title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
             </div>
           ))}
@@ -160,18 +143,18 @@ export default function LandingPage() {
       </section>
 
       {/* Five products */}
-      <section className="border-t border-border bg-secondary/20 py-20">
+      <section className="border-t border-border py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-2xl font-bold mb-2">Five capabilities. One workflow.</h2>
+          <h2 className="text-2xl font-semibold mb-2" style={{ letterSpacing: "-0.02em" }}>Five capabilities. One workflow.</h2>
           <p className="text-muted-foreground mb-12">ScoutOS orchestrates five distinct TinyFish intelligence capabilities to give you depth no single tool can provide.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {products.map(({ name, role, description, icon: Icon, color, bg }) => (
-              <div key={name} className="bg-white rounded-lg border border-border p-5 hover:shadow-sm transition-shadow">
-                <div className={`h-9 w-9 rounded-md ${bg} flex items-center justify-center mb-4`}>
-                  <Icon className={`h-4.5 w-4.5 ${color}`} />
+            {products.map(({ name, role, description, icon: Icon }) => (
+              <div key={name} className="bg-card rounded-lg border border-border p-5 hover:border-primary/30 transition-colors">
+                <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <Icon className="h-4 w-4 text-primary" />
                 </div>
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className="font-semibold text-sm">{name}</span>
+                  <span className="font-medium text-sm">{name}</span>
                   <span className="text-xs text-muted-foreground">·</span>
                   <span className="text-xs text-muted-foreground">{role}</span>
                 </div>
@@ -186,16 +169,16 @@ export default function LandingPage() {
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-2xl font-bold mb-4">Evidence-backed intelligence</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{ letterSpacing: "-0.02em" }}>Evidence-backed intelligence</h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
               Every claim in a ScoutOS report traces back to its source. We distinguish facts extracted directly from pages, inferences drawn from evidence, and hypotheses that need further validation.
             </p>
             <div className="space-y-3">
               {[
-                { label: "FACT", desc: "Directly extracted from source", color: "bg-emerald-100 text-emerald-700" },
-                { label: "INFERENCE", desc: "Interpreted from available evidence", color: "bg-blue-100 text-blue-700" },
-                { label: "HYPOTHESIS", desc: "Possible opportunity for validation", color: "bg-purple-100 text-purple-700" },
-                { label: "UNKNOWN", desc: "Could not be established", color: "bg-gray-100 text-gray-600" },
+                { label: "FACT", desc: "Directly extracted from source", color: "bg-emerald-500/15 text-emerald-400" },
+                { label: "INFERENCE", desc: "Interpreted from available evidence", color: "bg-primary/15 text-primary" },
+                { label: "HYPOTHESIS", desc: "Possible opportunity for validation", color: "bg-purple-500/15 text-purple-400" },
+                { label: "UNKNOWN", desc: "Could not be established", color: "bg-secondary text-muted-foreground" },
               ].map(({ label, desc, color }) => (
                 <div key={label} className="flex items-center gap-3">
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${color}`}>{label}</span>
@@ -210,8 +193,8 @@ export default function LandingPage() {
               { icon: BarChart3, title: "Competitor Comparisons", desc: "Side-by-side pricing, features, and positioning from live sources." },
               { icon: Shield, title: "Continuous Monitoring", desc: "Track competitor changes over time with automated page and topic monitors." },
             ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="flex gap-4 p-4 rounded-lg border border-border">
-                <div className="h-8 w-8 rounded-md bg-primary/8 flex items-center justify-center shrink-0">
+              <div key={title} className="flex gap-4 p-4 rounded-lg border border-border bg-card">
+                <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                   <Icon className="h-4 w-4 text-primary" />
                 </div>
                 <div>
@@ -225,14 +208,14 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-border bg-primary py-16">
+      <section className="border-t border-border py-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold text-white mb-3">Start your first intelligence mission</h2>
-          <p className="text-primary-foreground/80 mb-8 max-w-lg mx-auto">
+          <h2 className="text-2xl font-semibold mb-3" style={{ letterSpacing: "-0.02em" }}>Start your first intelligence mission</h2>
+          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
             Describe a business goal. ScoutOS handles the research.
           </p>
           <Link href="/signup">
-            <Button size="lg" variant="secondary" className="gap-2">
+            <Button size="lg" className="gap-2">
               Create free account <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
@@ -244,7 +227,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
             <div className="h-5 w-5 rounded bg-primary flex items-center justify-center">
-              <Zap className="h-3 w-3 text-white" />
+              <Zap className="h-3 w-3 text-white" fill="white" />
             </div>
             <span>ScoutOS</span>
           </div>

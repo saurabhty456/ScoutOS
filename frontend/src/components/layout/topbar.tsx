@@ -39,14 +39,14 @@ export function Topbar({ title }: TopbarProps) {
   const initials = userName.slice(0, 2).toUpperCase();
 
   return (
-    <header className="h-14 border-b border-border bg-white flex items-center justify-between px-6 shrink-0 z-30">
+    <header className="h-14 border-b border-border bg-background flex items-center justify-between px-6 shrink-0 z-30">
       <div className="flex items-center gap-3">
-        {title && <h1 className="text-sm font-semibold text-foreground">{title}</h1>}
+        {title && <h1 className="text-sm font-medium text-foreground">{title}</h1>}
       </div>
       <div className="flex items-center gap-2">
         <div className="relative hidden md:block">
           <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" />
-          <Input className="pl-8 h-8 w-56 text-xs bg-secondary border-0" placeholder="Search missions…" />
+          <Input className="pl-8 h-8 w-56 text-xs bg-secondary border-0" placeholder="Search missions..." />
         </div>
         <Button variant="ghost" size="icon" className="h-8 w-8 relative">
           <Bell className="h-4 w-4" />
@@ -66,21 +66,21 @@ export function Topbar({ title }: TopbarProps) {
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-full mt-2 w-56 rounded-lg border border-border bg-white shadow-lg overflow-hidden z-50">
+            <div className="absolute right-0 top-full mt-2 w-56 rounded-lg border border-border bg-popover shadow-lg overflow-hidden z-50">
               <div className="px-3 py-3 border-b border-border">
-                <div className="text-sm font-medium truncate">{userName}</div>
+                <div className="text-sm font-medium truncate text-foreground">{userName}</div>
                 <div className="text-xs text-muted-foreground truncate mt-0.5">Signed in</div>
               </div>
-              <Link href="/settings" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5 px-3 py-2 text-sm hover:bg-secondary transition-colors">
-                <Settings className="h-4 w-4 text-muted-foreground" />
+              <Link href="/settings" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5 px-3 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors">
+                <Settings className="h-4 w-4" />
                 Settings
               </Link>
-              <Link href="/settings" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5 px-3 py-2 text-sm hover:bg-secondary transition-colors">
-                <User className="h-4 w-4 text-muted-foreground" />
+              <Link href="/settings" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5 px-3 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors">
+                <User className="h-4 w-4" />
                 Profile
               </Link>
               <div className="border-t border-border">
-                <button onClick={handleLogout} className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-destructive hover:bg-destructive/5 transition-colors">
+                <button onClick={handleLogout} className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-red-400 hover:bg-destructive/10 transition-colors">
                   <LogOut className="h-4 w-4" />
                   Sign out
                 </button>

@@ -17,10 +17,7 @@ export default function SignupPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters.");
-      return;
-    }
+    if (password.length < 8) { setError("Password must be at least 8 characters."); return; }
     setLoading(true);
     setError("");
     try {
@@ -35,23 +32,21 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-secondary/30 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="flex justify-center mb-8">
           <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
-              <Zap className="h-4 w-4 text-white" />
+            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+              <Zap className="h-4 w-4 text-white" fill="white" />
             </div>
-            <span className="font-semibold">ScoutOS</span>
+            <span className="font-semibold tracking-tight">ScoutOS</span>
           </Link>
         </div>
-        <div className="bg-white rounded-xl border border-border p-8 shadow-sm">
+        <div className="bg-card rounded-xl border border-border p-8">
           <h1 className="text-lg font-semibold mb-1">Create account</h1>
           <p className="text-sm text-muted-foreground mb-6">Start your first intelligence mission in minutes.</p>
 
-          {error && (
-            <div className="mb-4 p-3 rounded-md bg-destructive/10 text-destructive text-sm">{error}</div>
-          )}
+          {error && <div className="mb-4 p-3 rounded-md bg-destructive/10 text-red-400 text-sm">{error}</div>}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

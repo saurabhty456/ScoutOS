@@ -75,7 +75,7 @@ export default function MissionsPage() {
             <div className="space-y-2.5">
               {list.map((m) => (
                 <Link key={m.id} href={`/missions/${m.id}`}>
-                  <div className="group flex items-start gap-4 p-4 rounded-xl border border-border bg-white hover:shadow-sm hover:border-primary/20 transition-all cursor-pointer">
+                  <div className="group flex items-start gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/20 transition-all cursor-pointer">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <div className="font-medium text-sm group-hover:text-primary transition-colors">{m.title}</div>
@@ -90,10 +90,10 @@ export default function MissionsPage() {
                           <span className="bg-secondary rounded px-1.5 py-0.5 text-[10px] font-medium">{m.input_parameters.industry}</span>
                         )}
                         {m.input_parameters?.include_monitoring && (
-                          <span className="text-purple-600 text-[10px] font-medium">Monitoring</span>
+                          <span className="text-purple-400 text-[10px] font-medium">Monitoring</span>
                         )}
                         {m.input_parameters?.include_browser_action && (
-                          <span className="text-orange-600 text-[10px] font-medium">Browser Action</span>
+                          <span className="text-orange-400 text-[10px] font-medium">Browser Action</span>
                         )}
                       </div>
                     </div>
