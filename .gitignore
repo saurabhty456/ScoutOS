@@ -1,0 +1,59 @@
+# ─── Environment & Secrets ───────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.env
+
+# ─── Backend (Python / FastAPI) ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+.python-version
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+scoutos.db
+
+# Playwright
+playwright-report/
+test-results/
+.playwright/
+
+# ─── Frontend (Next.js / Node) ────────────────────────────────────────────────
+node_modules/
+.next/
+out/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# ─── IDE & Editor ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ─── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Desktop.ini
