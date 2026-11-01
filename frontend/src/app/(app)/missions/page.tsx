@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Clock, Loader2, Crosshair } from "lucide-react";
+import { Plus, Clock, Loader2, Crosshair, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Topbar } from "@/components/layout/topbar";
@@ -14,13 +14,14 @@ const STATUS_VARIANTS: Record<string, "success" | "warning" | "info" | "destruct
   partially_completed: "warning",
   failed: "destructive",
   cancelled: "secondary",
+  draft: "secondary",
+  queued: "info",
   discovering: "info",
   extracting: "info",
   investigating: "info",
   analyzing: "info",
   generating_report: "info",
   planning: "info",
-  draft: "secondary",
 };
 
 export default function MissionsPage() {
@@ -43,7 +44,7 @@ export default function MissionsPage() {
             <div>
               <h1 className="text-xl font-semibold">Intelligence Missions</h1>
               <p className="text-sm text-muted-foreground mt-0.5">
-                {loading ? "Loading…" : `${list.length} mission${list.length !== 1 ? "s" : ""}`}
+                {loading ? "Loading..." : `${list.length} mission${list.length !== 1 ? "s" : ""}`}
               </p>
             </div>
             <Link href="/missions/new">
@@ -54,40 +55,53 @@ export default function MissionsPage() {
           </div>
 
           {loading ? (
-            <div className="flex justify-center py-16">
+            <div className="flex justify-center py-20">
               <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
             </div>
           ) : list.length === 0 ? (
-            <div className="text-center py-16">
-              <Crosshair className="h-10 w-10 text-muted-foreground/30 mx-auto mb-4" />
+            <div className="text-center py-20">
+              <div className="h-14 w-14 rounded-xl bg-primary/8 flex items-center justify-center mx-auto mb-4">
+                <Crosshair className="h-7 w-7 text-primary" />
+              </div>
               <h3 className="font-medium mb-1">No missions yet</h3>
-              <p className="text-sm text-muted-foreground mb-6">Create your first intelligence mission to get started.</p>
+              <p className="text-sm text-muted-foreground mb-6 max-w-sm mx-auto">
+                Create your first intelligence mission. Describe a business goal and ScoutOS handles the research.
+              </p>
               <Link href="/missions/new">
                 <Button className="gap-2"><Plus className="h-4 w-4" /> Create Mission</Button>
               </Link>
             </div>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {list.map((m) => (
                 <Link key={m.id} href={`/missions/${m.id}`}>
-                  <div className="flex items-start justify-between p-4 rounded-lg border border-border bg-white hover:shadow-sm hover:border-primary/20 transition-all cursor-pointer">
-                    <div className="flex-1 min-w-0 pr-4">
-                      <div className="font-medium text-sm mb-0.5">{m.title}</div>
-                      <p className="text-xs text-muted-foreground line-clamp-1">{m.objective}</p>
-                      <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
+                  <div className="group flex items-start gap-4 p-4 rounded-xl border border-border bg-white hover:shadow-sm hover:border-primary/20 transition-all cursor-pointer">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="font-medium text-sm group-hover:text-primary transition-colors">{m.title}</div>
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-1 mb-2">{m.objective}</p>
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <Clock className="h-3 w-3" />
                           {formatRelativeTime(m.created_at)}
                         </span>
                         {m.input_parameters?.industry && (
-                          <span className="bg-secondary rounded px-1.5 py-0.5">{m.input_parameters.industry}</span>
+                          <span className="bg-secondary rounded px-1.5 py-0.5 text-[10px] font-medium">{m.input_parameters.industry}</span>
+                        )}
+                        {m.input_parameters?.include_monitoring && (
+                          <span className="text-purple-600 text-[10px] font-medium">Monitoring</span>
+                        )}
+                        {m.input_parameters?.include_browser_action && (
+                          <span className="text-orange-600 text-[10px] font-medium">Browser Action</span>
                         )}
                       </div>
                     </div>
-                    <div className="shrink-0">
+                    <div className="flex items-center gap-3 shrink-0">
                       <Badge variant={STATUS_VARIANTS[m.status] || "secondary"} className="capitalize">
                         {m.status.replace(/_/g, " ")}
                       </Badge>
+                      <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     </div>
                   </div>
                 </Link>

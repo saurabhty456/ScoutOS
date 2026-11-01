@@ -87,6 +87,8 @@ export default function NewMissionPage() {
         include_monitoring: includeMonitoring,
         include_browser_action: includeBrowser,
       });
+      // Auto-start the mission immediately after creation
+      await missionsApi.start(mission.id);
       router.push(`/missions/${mission.id}`);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to create mission");
@@ -246,7 +248,7 @@ export default function NewMissionPage() {
             <div className="flex items-center gap-3 pt-2">
               <Button type="submit" disabled={loading} className="gap-2">
                 {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-                Create Mission
+                {loading ? "Creating & starting..." : "Create & Start Mission"}
               </Button>
               <Button type="button" variant="ghost" onClick={() => router.push("/missions")}>
                 Cancel
