@@ -47,8 +47,8 @@ function stepLabel(type: string): string {
 }
 
 function statusColor(status: string) {
-  if (status === "completed") return "text-emerald-600";
-  if (status === "running") return "text-blue-600";
+  if (status === "completed") return "text-emerald-400";
+  if (status === "running") return "text-primary";
   if (status === "failed") return "text-destructive";
   if (status === "skipped") return "text-muted-foreground";
   return "text-muted-foreground";
@@ -164,7 +164,7 @@ export default function MissionPage() {
       <Topbar title={truncate(mission.title, 50)} />
       <main className="flex-1 overflow-y-auto">
         {/* Mission header */}
-        <div className="border-b border-border bg-white px-6 py-4">
+        <div className="border-b border-border bg-card px-6 py-4">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-start justify-between gap-4 mb-3">
               <div>
@@ -227,7 +227,7 @@ export default function MissionPage() {
         </div>
 
         {/* Tabs */}
-        <div className="border-b border-border bg-white">
+        <div className="border-b border-border bg-card">
           <div className="max-w-5xl mx-auto px-6">
             <div className="flex gap-0">
               {TABS.map((t) => (
@@ -605,8 +605,8 @@ export default function MissionPage() {
 
                   {/* Missing info */}
                   {report.structured_content.missing_information?.length > 0 && (
-                    <Card className="shadow-none border-amber-200">
-                      <CardHeader className="pb-3"><CardTitle className="text-sm text-amber-700">Information Gaps</CardTitle></CardHeader>
+                    <Card className="border-amber-500/20">
+                      <CardHeader className="pb-3"><CardTitle className="text-sm text-amber-400">Information Gaps</CardTitle></CardHeader>
                       <CardContent className="pt-0 space-y-1.5">
                         {report.structured_content.missing_information.map((m, i) => (
                           <div key={i} className="flex gap-2 text-sm text-muted-foreground">

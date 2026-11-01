@@ -30,46 +30,32 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-secondary/30 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="flex justify-center mb-8">
           <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
-              <Zap className="h-4 w-4 text-white" />
+            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+              <Zap className="h-4 w-4 text-white" fill="white" />
             </div>
-            <span className="font-semibold">ScoutOS</span>
+            <span className="font-semibold tracking-tight">ScoutOS</span>
           </Link>
         </div>
-        <div className="bg-white rounded-xl border border-border p-8 shadow-sm">
+        <div className="bg-card rounded-xl border border-border p-8">
           <h1 className="text-lg font-semibold mb-1">Sign in</h1>
           <p className="text-sm text-muted-foreground mb-6">Welcome back to your intelligence workspace.</p>
 
           {error && (
-            <div className="mb-4 p-3 rounded-md bg-destructive/10 text-destructive text-sm">
-              {error}
-            </div>
+            <div className="mb-4 p-3 rounded-md bg-destructive/10 text-red-400 text-sm">{error}</div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="text-xs font-medium text-foreground mb-1.5 block">Email</label>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
-                required
-              />
+              <label className="text-xs font-medium mb-1.5 block">Email</label>
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" required />
             </div>
             <div>
-              <label className="text-xs font-medium text-foreground mb-1.5 block">Password</label>
-              <Input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-              />
+              <label className="text-xs font-medium mb-1.5 block">Password</label>
+              <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="........" required />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
               {loading && <Loader2 className="h-4 w-4 animate-spin" />}
@@ -79,9 +65,7 @@ export default function LoginPage() {
 
           <p className="text-sm text-center text-muted-foreground mt-6">
             No account?{" "}
-            <Link href="/signup" className="text-primary hover:underline font-medium">
-              Create one
-            </Link>
+            <Link href="/signup" className="text-primary hover:underline font-medium">Create one</Link>
           </p>
         </div>
       </div>

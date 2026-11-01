@@ -31,7 +31,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "relative flex flex-col border-r border-border bg-white transition-all duration-200 shrink-0",
+        "relative flex flex-col border-r border-border bg-background transition-all duration-200 shrink-0",
         collapsed ? "w-16" : "w-56"
       )}
     >
@@ -41,9 +41,9 @@ export function Sidebar() {
           <Zap className="h-4 w-4 text-white" fill="white" />
         </div>
         {!collapsed && (
-          <div className="flex flex-col">
+          <div className="flex flex-col leading-none">
             <span className="font-semibold text-sm tracking-tight">ScoutOS</span>
-            <span className="text-[10px] text-muted-foreground">Business Intelligence</span>
+            <span className="text-[10px] text-muted-foreground mt-0.5">Business Intelligence</span>
           </div>
         )}
       </div>
@@ -102,7 +102,7 @@ export function Sidebar() {
       {/* Collapse toggle */}
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-20 h-6 w-6 rounded-full border border-border bg-white shadow-sm flex items-center justify-center hover:bg-secondary transition-colors z-10"
+        className="absolute -right-3 top-20 h-6 w-6 rounded-full border border-border bg-secondary shadow-sm flex items-center justify-center hover:bg-accent transition-colors z-10"
       >
         {collapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
       </button>
