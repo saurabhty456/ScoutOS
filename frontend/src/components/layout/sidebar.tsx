@@ -2,18 +2,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard,
-  Crosshair,
-  Globe,
-  FileText,
-  Bell,
-  MousePointer,
-  Activity,
-  Settings,
-  LogOut,
-  Zap,
-  ChevronLeft,
-  ChevronRight,
+  LayoutDashboard, Crosshair, Globe, FileText, Bell,
+  MousePointer, Activity, Settings, LogOut, Zap,
+  ChevronLeft, ChevronRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -41,21 +32,24 @@ export function Sidebar() {
     <aside
       className={cn(
         "relative flex flex-col border-r border-border bg-white transition-all duration-200 shrink-0",
-        collapsed ? "w-14" : "w-56"
+        collapsed ? "w-16" : "w-56"
       )}
     >
       {/* Logo */}
-      <div className={cn("flex items-center gap-2 px-4 py-4 border-b border-border", collapsed && "justify-center px-0")}>
-        <div className="h-7 w-7 rounded-md bg-primary flex items-center justify-center shrink-0">
-          <Zap className="h-4 w-4 text-white" />
+      <div className={cn("flex items-center gap-2.5 px-4 h-14 border-b border-border", collapsed && "justify-center px-0")}>
+        <div className="h-7 w-7 rounded-lg bg-primary flex items-center justify-center shrink-0">
+          <Zap className="h-4 w-4 text-white" fill="white" />
         </div>
         {!collapsed && (
-          <span className="font-semibold text-sm tracking-tight text-foreground">ScoutOS</span>
+          <div className="flex flex-col">
+            <span className="font-semibold text-sm tracking-tight">ScoutOS</span>
+            <span className="text-[10px] text-muted-foreground">Business Intelligence</span>
+          </div>
         )}
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-0.5">
+      <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5 scrollbar-hide">
         {navItems.map(({ href, label, icon: Icon }) => {
           const active = pathname === href || pathname.startsWith(href + "/");
           return (
@@ -64,15 +58,16 @@ export function Sidebar() {
               href={href}
               title={collapsed ? label : undefined}
               className={cn(
-                "flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors",
                 active
-                  ? "bg-primary/8 text-primary"
+                  ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:bg-secondary hover:text-foreground",
                 collapsed && "justify-center px-0"
               )}
             >
               <Icon className="h-4 w-4 shrink-0" />
               {!collapsed && <span>{label}</span>}
+              {active && !collapsed && <div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />}
             </Link>
           );
         })}
@@ -83,7 +78,7 @@ export function Sidebar() {
         <Link
           href="/settings"
           className={cn(
-            "flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors",
+            "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors",
             collapsed && "justify-center px-0"
           )}
           title={collapsed ? "Settings" : undefined}
@@ -94,7 +89,7 @@ export function Sidebar() {
         <button
           onClick={handleLogout}
           className={cn(
-            "w-full flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors",
+            "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors",
             collapsed && "justify-center px-0"
           )}
           title={collapsed ? "Logout" : undefined}
@@ -107,7 +102,7 @@ export function Sidebar() {
       {/* Collapse toggle */}
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-16 h-6 w-6 rounded-full border border-border bg-white shadow-sm flex items-center justify-center hover:bg-secondary transition-colors z-10"
+        className="absolute -right-3 top-20 h-6 w-6 rounded-full border border-border bg-white shadow-sm flex items-center justify-center hover:bg-secondary transition-colors z-10"
       >
         {collapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
       </button>
